@@ -19,7 +19,7 @@ def main():
     #Obsługa argumentów
     parser = argparse.ArgumentParser()
     parser.add_argument('env', choices=['ins', 'uat', 'prd'], help='Podaj środowisko')
-    parser.add_argument('app', choices=['ksms', 'nsp,', 'sp2k'],help='Podaj nazwe aplikacji aplikacjep')
+    parser.add_argument('app', choices=['ksms', 'nsp', 'sp2k'],help='Podaj nazwe aplikacji aplikacjep')
     parser.add_argument('file', nargs='*', help='Podaj ścieżki plików. Można podać kilka.')
     args = parser.parse_args()
     #Generowanie zmiennych
@@ -50,7 +50,7 @@ def main():
     logging.info(msg)
     print(msg)
     for server in server_list:
-        msg = "Rozpoczynam wysyłanie zatrzymywanie usługi %(app)s na %(server)s" % {'app': app, 'server': server.text}
+        msg = "Rozpoczynam wysyłanie zatrzymywanie usłuGi %(app)s na %(server)s" % {'app': app, 'server': server.text}
         logging.info(msg)
         print(msg)
         #Zatrzymywanie usługi
