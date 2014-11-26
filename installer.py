@@ -50,7 +50,7 @@ def main():
     logging.info(msg)
     print(msg)
     for server in server_list:
-        msg = "Rozpoczynam wysyłanie zatrzymywanie usłuGi %(app)s na %(server)s" % {'app': app, 'server': server.text}
+        msg = "Rozpoczynam wysyłanie zatrzymywanie usługi %(app)s na %(server)s" % {'app': app, 'server': server.text}
         logging.info(msg)
         print(msg)
         #Zatrzymywanie usługi
