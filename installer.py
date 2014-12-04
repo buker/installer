@@ -12,6 +12,7 @@ import subprocess
 
 #Konfiguracja logowania
 logging.basicConfig(format='%(asctime)s [%(levelname)s] - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', filename='installer.log', filemode='w', level=logging.DEBUG, stream=sys.stdout )
+
 #Główna funkcja
 def main():
     msg = 'Rozpoczynam prace instalatora'
@@ -109,11 +110,15 @@ def main():
                 logging.info(output[0].decode('utf8'))
                 print(output[0].decode('utf8'))
 
-        #Odpalanie configure
+        #Odpalanie configure lub update.sh dla nsp
         msg= "Uruhamiam configure.sh dla aplikacji %(app)s na serwerze %(server)s" % {'app': app, 'server': server.text}
         print(msg)
         logging.info(msg)
-        path_configure = "cd /opt/kontakt/apps/%(app)s/; bash configure.sh" % {'app': app}
+        if app == 'nsp':
+            path_configure = "cd /opt/kontakt/apps/%(app)s/; bash update.sh" % {'app': app}
+        else:
+            path_configure = "cd /opt/kontakt/apps/%(app)s/; bash configure.sh" % {'app': app}
+
         logging.debug(path_configure)
         configure = subprocess.Popen(['ssh', path_server,  path_configure], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output = configure.communicate()
