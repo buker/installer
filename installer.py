@@ -20,7 +20,7 @@ def main():
     #Obsługa argumentów
     parser = argparse.ArgumentParser()
     parser.add_argument('env', choices=['ins', 'uat', 'prd'], help='Podaj środowisko')
-    parser.add_argument('app', choices=['ksms', 'nsp', 'sp2k'],help='Podaj nazwe aplikacji aplikacjep')
+    parser.add_argument('app', choices=['ksms', 'nsp', 'screenpop'],help='Podaj nazwe aplikacji aplikacjep')
     parser.add_argument('file', nargs='*', help='Podaj ścieżki plików. Można podać kilka.')
     args = parser.parse_args()
     #Generowanie zmiennych
