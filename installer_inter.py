@@ -12,7 +12,21 @@ import subprocess
 
 #Konfiguracja logowania
 logging.basicConfig(format='%(asctime)s [%(levelname)s] - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', filename='installer.log', filemode='w', level=logging.DEBUG, stream=sys.stdout )
-
+def pars_args():
+    msg = 'Rozpoczynam prace instalatora'
+    logging.info(msg)
+    #Obsługa argumentów
+    parser = argparse.ArgumentParser()
+    parser.add_argument('env', choices=['ins', 'uat', 'prd'], help='Podaj środowisko')
+    parser.add_argument('app', choices=['ksms', 'nsp', 'screenpop'],help='Podaj nazwe aplikacji aplikacjep')
+    parser.add_argument('file', nargs='*', help='Podaj ścieżki plików. Można podać kilka.')
+    args = parser.parse_args()
+    #Generowanie zmiennych
+    env = args.env
+    app = args.app
+    files = args.file
+    msg = "Instalator został uruchomiony z parametrami env=%(env)s, app=%(app)s, files=%(files)s" % {'env': env, 'app': app, 'files': files}
+    logging.debug(msg)
 
 def pars_conf():
     #parsowanie configa

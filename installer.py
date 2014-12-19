@@ -29,7 +29,7 @@ def main():
     files = args.file
     msg = "Instalator został uruchomiony z parametrami env=%(env)s, app=%(app)s, files=%(files)s" % {'env': env, 'app': app, 'files': files}
     logging.debug(msg)
-
+#############################################################################################################################################
     #parsowanie configa
     msg = 'Sprawdzanie czy plik konfiguracyjny istnieje'
     logging.info(msg)
@@ -56,7 +56,7 @@ def main():
         print(msg)
         #Zatrzymywanie usługi
         path_server = "jboss7@%(server)s" % {'server': server.text}
-        path_app = "bash /opt/kontakt/apps/%(app)s/%(app)s.sh stop" % {'app': app}
+        path_app = "/etc/init.d/%(app)s stop" % {'app': app}
         logging.debug(path_server)
         logging.debug(path_app)
         stop = subprocess.Popen(["ssh", path_server, path_app], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -67,6 +67,9 @@ def main():
         else:
             logging.info(output[0].decode('utf8'))
             print(output[0].decode('utf8'))
+        check_status = 0
+        while check_status !=1:
+            stop = subprocess.Popen(["ssh", path_server, "ps aux|grep java|wc -l"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         #Wysyłka plików.
         for file in files:
